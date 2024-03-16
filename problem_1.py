@@ -103,18 +103,21 @@ def problem5(data):
     table = {}
 
     for i in range(1, len(data)):
-        potion_hash = hash(data[i][0])
-        if data[i][0] in table:
-            table[data[i][0]] += 1
+        potion = data[i][0]
+        potion_hash = hash(potion)
+
+        if potion_hash in table:
+            table[potion_hash][1] += 1
         else:
-            table[data[i][0]] = 1
+            table[potion_hash] = [potion, 1]
 
     max_recipes = None
     max_potion = None
 
-    for potion in table:
-        if max_recipes == None or max_recipes < table[potion]:
-            max_recipes = table[potion]
+    for potion_hash in table:
+        potion, recipes = table[potion_hash]
+        if max_recipes == None or max_recipes < recipes:
+            max_recipes = recipes
             max_potion = potion
 
     print(f"Зелье с максимальным количеством рецептов {max_potion} - {max_recipes}.")
