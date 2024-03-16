@@ -46,9 +46,10 @@ def problem1(data):
     write(herbs_data, "magicaPotions.csv")
 
     print(f"Общее кол-во всех трав {total}")
-
 def problem2(data):
-
+    """Сортирует данные таблицы в лексикографическом порядке по названию зелий с помощью алгоритма сортировки пузырьком. Выводит информацию о первых трех зельях, содержащих иван-чай.
+    data – таблица с данными
+    """
     for i in range(len(data)-1, 0, -1):
         for j in range(0, i-1):
             if data[j][0] > data[j+1][0]:
@@ -62,6 +63,9 @@ def problem2(data):
     for i in range(3):
         print(f"Зелье {ivan_chai[i][0]} имеет в своем составе иван-чай")
 def problem3(data):
+    """Осуществляет интерактивный поиск по таблице: при запросе по названию травы выводит зелье, содержащее ее, с самым маленьким количеством в аптеках.
+    data – таблица с данными
+    """
     while True:
         herb = input()
         if herb == "стоп":
@@ -81,6 +85,9 @@ def problem3(data):
         else:
             print(f"По вашему запросу: {herb} найден следующий вариант: {herb} используется в {potion}, его количество составляет: {count}")
 def problem4(data):
+    """Формирует список искристых зелий и выводит информацию о них.
+    data – таблица с данными
+    """
     sparkle = []
 
     for i in range(1, len(data)):
@@ -89,11 +96,14 @@ def problem4(data):
 
     for potion in sparkle:
         print(f"{potion[0]} осталось в наличии {potion[1]} штук")
-
 def problem5(data):
+    """Формирует хэш-таблицу (словарь) по хеш кодам названий зелий. Выводит информацию о зелье с самым большим количеством рецептов.
+    data – таблица с данными
+    """
     table = {}
 
     for i in range(1, len(data)):
+        potion_hash = hash(data[i][0])
         if data[i][0] in table:
             table[data[i][0]] += 1
         else:
@@ -108,8 +118,11 @@ def problem5(data):
             max_potion = potion
 
     print(f"Зелье с максимальным количеством рецептов {max_potion} - {max_recipes}.")
+
 def main():
+    """Точка входа программы.
+    """
     data = read("magical.txt")
-    problem5(data)
+    problem1(data)
 
 main()
